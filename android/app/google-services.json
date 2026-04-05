@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "31432783698",
+    "project_id": "regen-f1dbf",
+    "storage_bucket": "regen-f1dbf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31432783698:android:62363eecfa05d87945ac8b",
+        "android_client_info": {
+          "package_name": "com.example.regen_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5ySMpT89P2wB3t4WvZyqccyJZ9HSLJQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

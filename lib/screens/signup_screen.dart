@@ -84,7 +84,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: Firebase Sign Up implementation
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
@@ -103,7 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Text("Already have an account? "),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context); // Goes back to Log In screen
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       'Log In',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/login_screen.dart'; // We will create this next
+import 'screens/login_screen.dart';
+import 'screens/main_layout.dart'; 
+
 
 void main() {
   runApp(const ReGenApp());
@@ -14,12 +16,12 @@ class ReGenApp extends StatelessWidget {
       title: 'ReGen',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'SFPro', // Applies your custom font globally
+        fontFamily: 'SFPro',
         scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const MainLayout(),
     );
   }
 }

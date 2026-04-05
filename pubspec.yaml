@@ -28,12 +28,12 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cloud_firestore: ^6.2.0
+  firebase_auth: ^6.3.0
+  firebase_core: ^4.6.0
+  firebase_storage: ^13.2.0
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -53,13 +53,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # To add assets to your application, add an assets section:
   assets:
-    - assets/images/ # Good to have this ready for later
+    - assets/images/ 
 
   fonts:
     - family: SFPro
       fonts:
-        - asset: assets/fonts/SF-Pro-Display-Regular.otf
-        - asset: assets/fonts/SF-Pro-Display-Bold.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Regular.otf
+        - asset: assets/fonts/SF-Pro-Rounded-Bold.otf
           weight: 700

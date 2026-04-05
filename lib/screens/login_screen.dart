@@ -59,7 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    // TODO: Forgot Password logic
                   },
                   child: const Text(
                     'Forgot your password?',
@@ -70,7 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  // TODO: Firebase Login implementation
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
