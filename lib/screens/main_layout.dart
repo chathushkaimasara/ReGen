@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'profile_screen.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout({super.key});
@@ -11,11 +12,12 @@ class MainLayout extends StatefulWidget {
 class _MainLayoutState extends State<MainLayout> {
   int _currentIndex = 0;
 
+  
   final List<Widget> _screens = [
     const HomeScreen(),
     const Center(child: Text('Video Screen Placeholder')),
     const Center(child: Text('Search Screen Placeholder')),
-    const Center(child: Text('Profile Screen Placeholder')),
+    const ProfileScreen(), 
   ];
 
   @override
