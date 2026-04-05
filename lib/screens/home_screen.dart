@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'notification_screen.dart';
+import 'upload_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,14 +24,9 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add, color: Colors.black, size: 28),
             onPressed: () {
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.notifications_none, color: Colors.black, size: 28),
-            onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationScreen()),
+                MaterialPageRoute(builder: (context) => const UploadScreen()),
               );
             },
           ),
@@ -38,7 +34,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 100), // Bottom padding for floating nav
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 100),
         itemCount: 3,
         itemBuilder: (context, index) {
           return const PostCard();
