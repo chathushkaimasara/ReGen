@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class UploadScreen extends StatefulWidget {
@@ -13,19 +14,26 @@ class _UploadScreenState extends State<UploadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
         elevation: 0,
+        scrolledUnderElevation: 0,
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: Container(color: Colors.transparent),
+          ),
+        ),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFFF5F5F5),
+              color: Theme.of(context).colorScheme.secondary, 
             ),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 18),
+              icon: const Icon(Icons.arrow_back_ios_new, size: 18),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -33,7 +41,6 @@ class _UploadScreenState extends State<UploadScreen> {
         title: const Text(
           'Upload',
           style: TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 24,
             fontFamily: 'SFPro',
@@ -42,7 +49,12 @@ class _UploadScreenState extends State<UploadScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.only(
+          left: 20, 
+          right: 20, 
+          top: MediaQuery.of(context).padding.top + kToolbarHeight + 20, 
+          bottom: 20
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,13 +62,13 @@ class _UploadScreenState extends State<UploadScreen> {
               height: 140,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 3,
+                itemCount: 3, 
                 itemBuilder: (context, index) {
                   return Container(
                     width: 130,
                     margin: const EdgeInsets.only(right: 15),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFE0E0E0),
+                      color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.circular(15),
                     ),
                   );
@@ -65,32 +77,30 @@ class _UploadScreenState extends State<UploadScreen> {
             ),
             const SizedBox(height: 30),
             
-            // Text Fields
             _buildInputLabel('Title'),
-            _buildCustomTextField('Add A Title Here...', maxLines: 1),
+            _buildCustomTextField('Add A Title Here...', context, maxLines: 1),
             const SizedBox(height: 20),
             
             _buildInputLabel('Prompt'),
-            _buildCustomTextField('Add The Prompt Here...', maxLines: 3),
+            _buildCustomTextField('Add The Prompt Here...', context, maxLines: 3),
             const SizedBox(height: 20),
             
             _buildInputLabel('Description'),
-            _buildCustomTextField('Add A Description Here...', maxLines: 3),
+            _buildCustomTextField('Add A Description Here...', context, maxLines: 3),
             const SizedBox(height: 20),
             
             _buildInputLabel('AI Platform'),
-            _buildDropdownField(),
+            _buildDropdownField(context),
             
             const SizedBox(height: 40),
             
-            // Upload Button
             SizedBox(
-              width: double.infinity,
+              width: double.infinity, 
               child: ElevatedButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Theme.of(context).colorScheme.primary, // Adapts button color
+                  foregroundColor: Theme.of(context).scaffoldBackgroundColor,
                   padding: const EdgeInsets.symmetric(vertical: 18),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -98,11 +108,7 @@ class _UploadScreenState extends State<UploadScreen> {
                 ),
                 child: const Text(
                   'Upload',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -123,14 +129,17 @@ class _UploadScreenState extends State<UploadScreen> {
     );
   }
 
-  Widget _buildCustomTextField(String hintText, {int maxLines = 1}) {
+  Widget _buildCustomTextField(String hintText, BuildContext context, {int maxLines = 1}) {
     return TextField(
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.black38, fontSize: 14),
+        hintStyle: TextStyle(
+          color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.4), 
+          fontSize: 14
+        ),
         filled: true,
-        fillColor: const Color(0xFFF5F5F5),
+        fillColor: Theme.of(context).colorScheme.secondary,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
@@ -140,19 +149,21 @@ class _UploadScreenState extends State<UploadScreen> {
     );
   }
 
-  Widget _buildDropdownField() {
+  Widget _buildDropdownField(BuildContext context) {
     return DropdownButtonFormField<String>(
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color(0xFFF5F5F5),
+        fillColor: Theme.of(context).colorScheme.secondary,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
-      hint: const Text('Select The Platform', style: TextStyle(color: Colors.black38, fontSize: 14)),
-      icon: const Icon(Icons.keyboard_arrow_down, color: Colors.black),
+      hint: Text(
+        'Select The Platform', 
+        style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.4), fontSize: 14)
+      ),
       value: selectedPlatform,
       items: ['Midjourney', 'DALL-E 3', 'Stable Diffusion', 'Leonardo AI', 'Other']
           .map((platform) => DropdownMenuItem(

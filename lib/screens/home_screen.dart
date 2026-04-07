@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'notification_screen.dart';
 import 'upload_screen.dart';
@@ -8,21 +9,28 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true, 
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
         elevation: 0,
+        scrolledUnderElevation: 0,
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: Container(color: Colors.transparent),
+          ),
+        ),
         title: const Text(
           'ReGen',
           style: TextStyle(
             fontFamily: 'SFPro',
             fontWeight: FontWeight.bold,
             fontSize: 28,
-            color: Colors.black,
           ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add, color: Colors.black, size: 28),
+            icon: const Icon(Icons.add, size: 28),
             onPressed: () {
               Navigator.push(
                 context,
@@ -30,12 +38,26 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.notifications_none, size: 28),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NotificationScreen()),
+              );
+            },
+          ),
           const SizedBox(width: 10),
         ],
       ),
       body: ListView.builder(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 100),
-        itemCount: 3,
+        padding: EdgeInsets.only(
+          left: 20, 
+          right: 20, 
+          top: MediaQuery.of(context).padding.top + kToolbarHeight + 10, 
+          bottom: 100
+        ),
+        itemCount: 3, 
         itemBuilder: (context, index) {
           return const PostCard();
         },
@@ -58,7 +80,7 @@ class PostCard extends StatelessWidget {
             height: 350,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: const Color(0xFFE0E0E0),
+              color: Theme.of(context).colorScheme.secondary, // Dynamic Gray
               borderRadius: BorderRadius.circular(15),
             ),
           ),
@@ -69,14 +91,17 @@ class PostCard extends StatelessWidget {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Cat Riding A Car',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                   Text(
                     '@lol2456',
-                    style: TextStyle(color: Colors.black54, fontSize: 12),
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6), 
+                      fontSize: 12
+                    ),
                   ),
                 ],
               ),

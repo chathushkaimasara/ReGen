@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatelessWidget {
@@ -6,18 +7,26 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor.withOpacity(0.6),
         elevation: 0,
+        scrolledUnderElevation: 0,
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+            child: Container(color: Colors.transparent),
+          ),
+        ),
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFFF5F5F5),
+              color: Theme.of(context).colorScheme.secondary,
             ),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 18),
+              icon: const Icon(Icons.arrow_back_ios_new, size: 18),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -25,7 +34,6 @@ class NotificationScreen extends StatelessWidget {
         title: const Text(
           'Notification',
           style: TextStyle(
-            color: Colors.black,
             fontWeight: FontWeight.bold,
             fontFamily: 'SFPro',
           ),
@@ -33,7 +41,13 @@ class NotificationScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        // Added top padding so the list scrolls neatly under the frosted glass app bar
+        padding: EdgeInsets.only(
+          left: 20.0, 
+          right: 20.0, 
+          top: MediaQuery.of(context).padding.top + kToolbarHeight + 20, 
+          bottom: 20.0
+        ),
         children: const [
           NotificationHeader(title: 'Today'),
           NotificationTile(isLike: true, text: 'You Got A New Like On Your Post', subtext: '@lol2456 Liked Your Post'),
@@ -88,20 +102,20 @@ class NotificationTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12.0),
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
       decoration: BoxDecoration(
-        color: const Color(0xFFF5F5F5),
+        color: Theme.of(context).colorScheme.secondary, // Adapts to Dark Mode
         borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Color(0xFFE0E0E0),
+              color: Theme.of(context).scaffoldBackgroundColor, // Uses the main background color for contrast
             ),
             child: Icon(
               isLike ? Icons.favorite : Icons.chat_bubble,
-              color: Colors.black54,
+              color: Theme.of(context).iconTheme.color?.withOpacity(0.6), // Fades the icon slightly
               size: 20,
             ),
           ),
@@ -117,7 +131,10 @@ class NotificationTile extends StatelessWidget {
                 const SizedBox(height: 3),
                 Text(
                   subtext,
-                  style: const TextStyle(color: Colors.black54, fontSize: 11),
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6), // Fades the subtext
+                    fontSize: 11
+                  ),
                 ),
               ],
             ),
@@ -127,4 +144,3 @@ class NotificationTile extends StatelessWidget {
     );
   }
 }
-
