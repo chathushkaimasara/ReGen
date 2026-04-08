@@ -1,13 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import 'main_layout.dart';
-// ADD THIS IMPORT AT THE TOP:
 import '../services/database_service.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Need this for UserCredential
-
-// ...
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -43,13 +38,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() => _isLoading = true);
 
     try {
-      // 1. Create the account in Firebase Auth
       UserCredential? userCredential = await _authService.signUp(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
-      
-      // 2. Save the extra details to Firestore Database
+
       if (userCredential != null && userCredential.user != null) {
         await DatabaseService().createUserProfile(
           uid: userCredential.user!.uid,
@@ -57,9 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           name: _nameController.text.trim(),
         );
       }
-      
-      // 3. Since AuthGate is listening, we just pop all screens back to the root,
-      // and AuthGate will automatically detect the user and show the MainLayout!
+
       if (mounted) {
         Navigator.of(context).popUntil((route) => route.isFirst);
       }
@@ -73,9 +64,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (mounted) setState(() => _isLoading = false);
     }
   }
-
-// ... Keep the rest of your UI code exactly the same below here
-
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Text("Already have an account? "),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context); // Goes back to Log In screen
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       'Log In',
