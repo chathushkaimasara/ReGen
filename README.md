@@ -32,14 +32,6 @@ The rapid advancement of artificial intelligence has led to a surge in AI-genera
 
 ---
 
-## 📱 Screenshots
-*(Note: Replace these placeholder links with actual paths to your screenshots once you upload them to your repo!)*
-
-| Home Feed | Video Feed | Upload Screen | User Profile |
-| :---: | :---: | :---: | :---: |
-| <img src="screenshots/home.png" width="200"/> | <img src="screenshots/video.png" width="200"/> | <img src="screenshots/upload.png" width="200"/> | <img src="screenshots/profile.png" width="200"/> |
-
----
 
 ## 🚀 Getting Started
 
